@@ -1,0 +1,8 @@
+{
+  "name": "Vibe4Wellness",
+  "description": "Vibe4Wellness, featuring an AI-powered brand guide assistant.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
