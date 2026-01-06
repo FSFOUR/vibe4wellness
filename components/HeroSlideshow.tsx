@@ -63,16 +63,16 @@ const HeroSlideshow: React.FC = () => {
 
   if (slides.length === 0) {
     return (
-      <div className="relative rounded-[3.5rem] shadow-2xl w-full h-[650px] border-[12px] border-white z-10 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
+      <div className="relative rounded-3xl lg:rounded-[3.5rem] shadow-2xl w-full h-[350px] sm:h-[500px] lg:h-[650px] border-4 lg:border-[12px] border-white z-10 bg-slate-50 flex flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-slate-100 animate-pulse"></div>
-        <div className="relative z-20 text-center space-y-6 px-10">
-          <div className="w-20 h-20 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin mx-auto"></div>
+        <div className="relative z-20 text-center space-y-4 lg:space-y-6 px-10">
+          <div className="w-12 h-12 lg:w-20 lg:h-20 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin mx-auto"></div>
           <div>
-            <p className="text-emerald-600 font-black uppercase tracking-[0.3em] text-[10px]">Vibe Architecture In Progress</p>
-            <h3 className="text-2xl font-black text-slate-900 mt-2">Visualizing the 4 Pillars...</h3>
-            <p className="text-slate-500 text-sm font-medium mt-2 max-w-sm mx-auto">Gemini is painting high-resolution visuals for your Eat, Act, Sleep, and Care protocols.</p>
+            <p className="text-emerald-600 font-black uppercase tracking-[0.3em] text-[8px] lg:text-[10px]">Vibe Architecture In Progress</p>
+            <h3 className="text-xl lg:text-2xl font-black text-slate-900 mt-2">Visualizing...</h3>
+            <p className="text-slate-500 text-[10px] lg:text-sm font-medium mt-2 max-w-[200px] lg:max-w-sm mx-auto">Gemini is painting your wellness protocols.</p>
           </div>
-          <div className="w-48 h-1.5 bg-slate-200 rounded-full mx-auto overflow-hidden">
+          <div className="w-32 lg:w-48 h-1 bg-slate-200 rounded-full mx-auto overflow-hidden">
             <div 
               className="h-full bg-emerald-500 transition-all duration-700 ease-out" 
               style={{ width: `${loadingProgress}%` }}
@@ -86,7 +86,7 @@ const HeroSlideshow: React.FC = () => {
   const pillarNames = ["Eat Well", "Act Well", "Sleep Well", "Care Well"];
 
   return (
-    <div className="relative group rounded-[3.5rem] shadow-2xl w-full h-[650px] border-[12px] border-white z-10 overflow-hidden bg-slate-900">
+    <div className="relative group rounded-3xl lg:rounded-[3.5rem] shadow-2xl w-full h-[350px] sm:h-[500px] lg:h-[650px] border-4 lg:border-[12px] border-white z-10 overflow-hidden bg-slate-900">
       {slides.map((src, idx) => (
         <div
           key={idx}
@@ -103,11 +103,11 @@ const HeroSlideshow: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
           
           {/* Animated Pillar Label */}
-          <div className={`absolute bottom-20 left-12 transition-all duration-1000 delay-500 ${idx === currentIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <h4 className="text-white text-5xl font-black tracking-tighter drop-shadow-2xl">
+          <div className={`absolute bottom-12 lg:bottom-20 left-8 lg:left-12 transition-all duration-1000 delay-500 ${idx === currentIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <h4 className="text-white text-3xl lg:text-5xl font-black tracking-tighter drop-shadow-2xl">
               {pillarNames[idx]}
             </h4>
-            <p className="text-emerald-400 text-sm font-bold mt-2 uppercase tracking-[0.2em] drop-shadow-lg">
+            <p className="text-emerald-400 text-[10px] lg:text-sm font-bold mt-2 uppercase tracking-[0.2em] drop-shadow-lg">
               Optimized by VibeGuide AI
             </p>
           </div>
@@ -115,17 +115,17 @@ const HeroSlideshow: React.FC = () => {
       ))}
 
       {/* Slide Indicators with Titles */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-4 z-30">
+      <div className="absolute bottom-6 lg:bottom-10 left-1/2 -translate-x-1/2 flex gap-3 lg:gap-4 z-30">
         {slides.map((_, idx) => (
           <button
             key={idx}
             onClick={() => setCurrentIndex(idx)}
-            className="group flex flex-col items-center gap-2"
+            className="group flex flex-col items-center gap-1.5 lg:gap-2"
           >
-            <div className={`h-1.5 rounded-full transition-all duration-500 ${
-              idx === currentIndex ? 'w-12 bg-white' : 'w-4 bg-white/40 hover:bg-white/60'
+            <div className={`h-1 lg:h-1.5 rounded-full transition-all duration-500 ${
+              idx === currentIndex ? 'w-8 lg:w-12 bg-white' : 'w-3 lg:w-4 bg-white/40 hover:bg-white/60'
             }`} />
-            <span className={`text-[9px] font-black uppercase tracking-widest transition-opacity duration-500 ${idx === currentIndex ? 'opacity-100 text-white' : 'opacity-0 group-hover:opacity-100 text-white/60'}`}>
+            <span className={`text-[7px] lg:text-[9px] font-black uppercase tracking-widest transition-opacity duration-500 ${idx === currentIndex ? 'opacity-100 text-white' : 'opacity-0 group-hover:opacity-100 text-white/60'} hidden sm:inline`}>
               {pillarNames[idx].split(' ')[0]}
             </span>
           </button>
@@ -133,25 +133,25 @@ const HeroSlideshow: React.FC = () => {
       </div>
 
       {/* AI Intelligence Badge */}
-      <div className="absolute top-8 left-8 z-30 flex items-center gap-3 px-5 py-2.5 bg-slate-900/60 backdrop-blur-xl rounded-full border border-white/10 shadow-2xl">
-        <span className="flex h-2 w-2 relative">
+      <div className="absolute top-4 lg:top-8 left-4 lg:left-8 z-30 flex items-center gap-2 lg:gap-3 px-3 lg:px-5 py-1.5 lg:py-2.5 bg-slate-900/60 backdrop-blur-xl rounded-full border border-white/10 shadow-2xl">
+        <span className="flex h-1.5 w-1.5 lg:h-2 lg:w-2 relative">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          <span className="relative inline-flex rounded-full h-1.5 w-1.5 lg:h-2 lg:w-2 bg-emerald-500"></span>
         </span>
-        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white">Gemini 2.5 Active Vision</span>
+        <span className="text-[7px] lg:text-[10px] font-black uppercase tracking-[0.2em] text-white">AI Vision</span>
       </div>
 
       {/* Navigation UI */}
-      <div className="absolute inset-x-8 top-1/2 -translate-y-1/2 flex justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-30">
+      <div className="absolute inset-x-4 lg:inset-x-8 top-1/2 -translate-y-1/2 flex justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-30 hidden lg:flex">
         <button 
           onClick={() => setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length)}
-          className="w-14 h-14 bg-white/10 backdrop-blur-lg border border-white/10 rounded-2xl flex items-center justify-center text-white hover:bg-white hover:text-slate-900 transition-all shadow-2xl group/btn"
+          className="w-12 lg:w-14 h-12 lg:h-14 bg-white/10 backdrop-blur-lg border border-white/10 rounded-2xl flex items-center justify-center text-white hover:bg-white hover:text-slate-900 transition-all shadow-2xl group/btn"
         >
           <span className="group-hover/btn:-translate-x-1 transition-transform">←</span>
         </button>
         <button 
           onClick={() => setCurrentIndex((prev) => (prev + 1) % slides.length)}
-          className="w-14 h-14 bg-white/10 backdrop-blur-lg border border-white/10 rounded-2xl flex items-center justify-center text-white hover:bg-white hover:text-slate-900 transition-all shadow-2xl group/btn"
+          className="w-12 lg:w-14 h-12 lg:h-14 bg-white/10 backdrop-blur-lg border border-white/10 rounded-2xl flex items-center justify-center text-white hover:bg-white hover:text-slate-900 transition-all shadow-2xl group/btn"
         >
           <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
         </button>

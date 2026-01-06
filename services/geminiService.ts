@@ -235,4 +235,46 @@ export class GeminiService {
       return null;
     }
   }
+
+  /**
+   * Generates a specific, fresh example for today for a specific pillar.
+   */
+  async generateInstantExample(pillarTitle: string) {
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const model = 'gemini-3-flash-preview';
+    const systemInstruction = `
+      You are a specialist for the ${pillarTitle} pillar at Vibe4Wellness.
+      Provide a specific, actionable example for today based on the pillar:
+      - If Eat Well: A 10-min vibrant recipe.
+      - If Act Well: A 5-min movement micro-ritual.
+      - If Sleep Well: A deep sleep recovery hack.
+      - If Care Well: A mindfulness/meditation micro-exercise.
+      
+      Format: JSON object with "title" (short, catchy) and "content" (the detailed ritual/recipe/routine).
+      Keep the content under 60 words. Use emojis! ✨🧘‍♀️🥗
+    `;
+
+    try {
+      const response = await ai.models.generateContent({
+        model,
+        contents: [{ role: 'user', parts: [{ text: `Give me today's instant ${pillarTitle} example.` }] }],
+        config: {
+          systemInstruction,
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: Type.OBJECT,
+            properties: {
+              title: { type: Type.STRING },
+              content: { type: Type.STRING },
+            },
+            required: ["title", "content"]
+          }
+        }
+      });
+      return JSON.parse(response.text || "{}");
+    } catch (error) {
+      console.error("Instant Example Error:", error);
+      return null;
+    }
+  }
 }
