@@ -102,8 +102,8 @@ const PillarModal: React.FC<PillarModalProps> = ({ pillar, onClose, onCtaClick }
           <div className="p-6 lg:p-12 lg:pt-12 flex gap-4 lg:gap-8 border-b border-slate-100 overflow-x-auto no-scrollbar">
             {[
               { id: 'overview', label: 'Overview', icon: '📖' },
-              { id: 'blueprint', label: 'AI Blueprint', icon: '✨' },
-              { id: 'specialist', label: 'Specialist Chat', icon: '🧠' }
+              { id: 'blueprint', label: 'Protocol Blueprint', icon: '✨' },
+              { id: 'specialist', label: 'Expert Support', icon: '🧠' }
             ].map(tab => (
               <button
                 key={tab.id}
@@ -124,11 +124,11 @@ const PillarModal: React.FC<PillarModalProps> = ({ pillar, onClose, onCtaClick }
             {/* TAB: OVERVIEW */}
             {activeTab === 'overview' && (
               <div className="space-y-10 lg:space-y-12 animate-in fade-in slide-in-from-left-4 duration-500">
-                {/* Dynamic Instant Example - FETCHED ON OPEN */}
+                {/* Dynamic Instant Example */}
                 <div className="bg-emerald-50/50 border border-emerald-100 rounded-[2rem] p-8 lg:p-10 relative overflow-hidden group">
                   <div className="absolute top-0 right-0 p-8 text-4xl opacity-10 group-hover:scale-125 transition-transform duration-700">⚡</div>
                   <div className="space-y-4 relative z-10">
-                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-600">Today's Live AI Ritual</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-600">Today's Live Ritual</span>
                     {loadingInstant ? (
                       <div className="space-y-3">
                         <div className="h-6 w-1/2 bg-emerald-200/50 rounded animate-pulse"></div>
@@ -141,7 +141,7 @@ const PillarModal: React.FC<PillarModalProps> = ({ pillar, onClose, onCtaClick }
                         <p className="text-slate-600 font-medium leading-relaxed italic">"{instantExample.content}"</p>
                       </>
                     ) : (
-                      <p className="text-slate-400 font-bold">Syncing fresh insight...</p>
+                      <p className="text-slate-400 font-bold">Curating insight...</p>
                     )}
                   </div>
                 </div>
@@ -171,7 +171,7 @@ const PillarModal: React.FC<PillarModalProps> = ({ pillar, onClose, onCtaClick }
               </div>
             )}
 
-            {/* TAB: AI BLUEPRINT */}
+            {/* TAB: BLUEPRINT */}
             {activeTab === 'blueprint' && (
               <div className="space-y-12 animate-in fade-in slide-in-from-left-4 duration-500">
                 {!aiDeepDive ? (
@@ -179,14 +179,14 @@ const PillarModal: React.FC<PillarModalProps> = ({ pillar, onClose, onCtaClick }
                     <div className="w-20 lg:w-24 h-20 lg:h-24 bg-emerald-100 rounded-full flex items-center justify-center text-4xl lg:text-5xl mx-auto animate-pulse">✨</div>
                     <div className="space-y-4">
                       <h4 className="text-xl lg:text-2xl font-black text-slate-900">Unlock Advanced Mastery</h4>
-                      <p className="text-sm lg:text-base text-slate-500 font-medium max-w-sm mx-auto leading-relaxed">Let VibeGuide AI analyze the {pillar.title} pillar to generate unique biohacking strategies.</p>
+                      <p className="text-sm lg:text-base text-slate-500 font-medium max-w-sm mx-auto leading-relaxed">Discover unique biohacking strategies specifically tailored for the {pillar.title} pillar.</p>
                     </div>
                     <button 
                       onClick={handleFetchAiInsight}
                       disabled={loadingAi}
                       className="bg-slate-900 text-white font-black px-10 lg:px-12 py-5 lg:py-6 rounded-2xl lg:rounded-[2rem] shadow-2xl hover:bg-emerald-600 transition-all active:scale-95 flex items-center gap-3 mx-auto disabled:opacity-50 text-xs lg:text-sm"
                     >
-                      {loadingAi ? 'Synthesizing...' : 'Generate Expert Blueprint'}
+                      {loadingAi ? 'Revealing Protocol...' : 'Generate Expert Blueprint'}
                       <span>💎</span>
                     </button>
                   </div>
@@ -198,8 +198,8 @@ const PillarModal: React.FC<PillarModalProps> = ({ pillar, onClose, onCtaClick }
                        </div>
                        <div className="relative z-10 space-y-10">
                          <div className="space-y-2">
-                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-400">Pillar Intelligence</span>
-                            <h4 className="text-3xl lg:text-4xl font-black tracking-tighter">Vibe Mastery Protocols</h4>
+                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-400">Pillar Expertise</span>
+                            <h4 className="text-3xl lg:text-4xl font-black tracking-tighter">Mastery Protocols</h4>
                          </div>
                          <div className="grid gap-4 lg:gap-6">
                            {aiDeepDive.advancedTips.map((tip, i) => (
@@ -213,13 +213,13 @@ const PillarModal: React.FC<PillarModalProps> = ({ pillar, onClose, onCtaClick }
                     </div>
 
                     <div className="bg-gradient-to-br from-orange-50 to-white p-8 lg:p-14 rounded-2xl lg:rounded-[3rem] border-l-8 border-orange-500 shadow-xl group">
-                       <span className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600 mb-6 block">The Signature Pro Hack</span>
+                       <span className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600 mb-6 block">The Signature Technique</span>
                        <p className="text-2xl lg:text-3xl font-black italic text-slate-900 leading-snug mb-10">"{aiDeepDive.proHack}"</p>
                        <button 
                          onClick={handleCopyHack}
                          className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-orange-600 transition-colors"
                        >
-                         {copied ? 'Copied to Clipboard! ✨' : 'Copy Secret Technique 📎'}
+                         {copied ? 'Copied to Clipboard! ✨' : 'Copy Signature Technique 📎'}
                        </button>
                     </div>
                   </div>
@@ -227,7 +227,7 @@ const PillarModal: React.FC<PillarModalProps> = ({ pillar, onClose, onCtaClick }
               </div>
             )}
 
-            {/* TAB: SPECIALIST CHAT */}
+            {/* TAB: EXPERT SUPPORT */}
             {activeTab === 'specialist' && (
               <div className="flex flex-col h-full animate-in fade-in slide-in-from-left-4 duration-500">
                  <div ref={chatScrollRef} className="flex-1 space-y-6 mb-8 pr-4 overflow-y-auto custom-scrollbar">
@@ -236,7 +236,7 @@ const PillarModal: React.FC<PillarModalProps> = ({ pillar, onClose, onCtaClick }
                          <div className="w-16 h-16 lg:w-20 lg:h-20 bg-slate-100 rounded-3xl flex items-center justify-center text-3xl lg:text-4xl mx-auto">🏗️</div>
                          <div className="space-y-2">
                            <h4 className="text-lg lg:text-xl font-black text-slate-900">Direct Line to the Architect</h4>
-                           <p className="text-slate-500 font-medium text-xs lg:text-sm">Ask anything about {pillar.title} and receive deep context.</p>
+                           <p className="text-slate-500 font-medium text-xs lg:text-sm">Ask anything about {pillar.title} and receive curated context.</p>
                          </div>
                       </div>
                     )}

@@ -7,7 +7,7 @@ const AIAssistant: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     { 
       role: 'model', 
-      text: "Hey there, Vibe-Seeker! 🌈 I'm VibeGuide, your personal wellness wingman! 🤘 Ready to sync your life and feel absolutely legendary today? Let's get this party started! 🧘‍♀️🥗✨ What's on your mind?",
+      text: "Hey there, Vibe-Seeker! 🌈 I'm VibeGuide, your personal wellness partner! 🤘 Ready to sync your life and feel absolutely legendary today? Let's get this journey started! 🧘‍♀️🥗✨ What's on your mind?",
       suggestions: ["Plan my lunch! 🥗", "Evening ritual? 🌙", "What is Act Well? ⚡"]
     }
   ]);
@@ -52,13 +52,13 @@ const AIAssistant: React.FC = () => {
         <div className="flex items-center gap-5 relative z-10">
           <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center text-3xl backdrop-blur-2xl border border-white/20 shadow-lg">✨</div>
           <div>
-            <h3 className="font-black text-xl tracking-tight">VibeGuide AI 🌈</h3>
-            <p className="text-[10px] text-emerald-100 font-black uppercase tracking-[0.3em] opacity-80">Living Your Best Life • Online</p>
+            <h3 className="font-black text-xl tracking-tight">VibeGuide 🌈</h3>
+            <p className="text-[10px] text-emerald-100 font-black uppercase tracking-[0.3em] opacity-80">Living Your Best Life • Present</p>
           </div>
         </div>
         <div className="flex items-center gap-3 bg-emerald-700/30 px-4 py-2 rounded-full border border-white/10 backdrop-blur-sm relative z-10">
           <span className="w-2.5 h-2.5 bg-emerald-300 rounded-full animate-pulse shadow-[0_0_8px_#6ee7b7]"></span>
-          <span className="text-[10px] font-black uppercase tracking-widest text-emerald-50">High Energy</span>
+          <span className="text-[10px] font-black uppercase tracking-widest text-emerald-50">Resonating</span>
         </div>
       </div>
 
@@ -111,7 +111,7 @@ const AIAssistant: React.FC = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            placeholder="Tell me a fun health tip! 🚀"
+            placeholder="Tell me a health tip! 🚀"
             className="w-full bg-slate-100/60 border-2 border-transparent rounded-[2rem] px-8 py-5 text-[15px] font-bold text-slate-800 focus:bg-white focus:border-emerald-500/20 focus:ring-4 focus:ring-emerald-500/5 outline-none transition-all placeholder:text-slate-400"
           />
         </div>

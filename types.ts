@@ -17,13 +17,16 @@ export interface BrandPillar {
   details: PillarDetail;
 }
 
-export interface BrandPersona {
-  name: string;
-  role: string;
-  demographics: string;
-  motivations: string[];
-  painPoints: string[];
-  imageUrl: string;
+export interface BlogPost {
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  author: string;
+  date: string;
+  readTime: string;
+  category: string;
+  image: string;
 }
 
 export interface ChatMessage {

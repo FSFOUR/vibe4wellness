@@ -14,6 +14,12 @@ export class GeminiService {
       Your goal is to provide helpful, grounded answers to user wellness queries.
       Focus on Vibe4Wellness pillars (Eat, Act, Sleep, Care) but use Google Search to provide up-to-date information.
       Keep the response concise, informative, and high-vibe. 
+
+      CRITICAL: You must always respond in JSON format with the following fields:
+      1. "text": Your grounded search answer.
+      2. "relatedTopics": An array of 3 short, catchy topics or questions related to the query for further exploration.
+      
+      Do not mention that you are an AI. Act as a deeply knowledgeable human researcher.
     `;
 
     try {
@@ -23,10 +29,19 @@ export class GeminiService {
         config: {
           systemInstruction,
           tools: [{ googleSearch: {} }],
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: Type.OBJECT,
+            properties: {
+              text: { type: Type.STRING },
+              relatedTopics: { type: Type.ARRAY, items: { type: Type.STRING } }
+            },
+            required: ["text", "relatedTopics"]
+          }
         },
       });
 
-      const text = response.text;
+      const json = JSON.parse(response.text || "{}");
       const groundingChunks = response.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
       
       // Extract unique URLs from grounding chunks
@@ -35,10 +50,18 @@ export class GeminiService {
         .filter((web: any) => web && web.uri)
         .map((web: any) => ({ title: web.title, uri: web.uri }));
 
-      return { text, sources };
+      return { 
+        text: json.text, 
+        relatedTopics: json.relatedTopics || [],
+        sources 
+      };
     } catch (error) {
       console.error("Gemini Search Error:", error);
-      return { text: "I couldn't complete the search right now. My vibe-synchronizer is calibrating! 🛠️", sources: [] };
+      return { 
+        text: "I couldn't complete the search right now. My resonance is recalibrating! 🛠️", 
+        relatedTopics: ["Circadian fasting", "Mindful breathing", "Plant-based energy"],
+        sources: [] 
+      };
     }
   }
 
@@ -49,7 +72,7 @@ export class GeminiService {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const model = 'gemini-3-flash-preview';
     const systemInstruction = `
-      You are "VibeGuide" 🌈, the super-friendly, high-energy, and playful AI wellness buddy for Vibe4Wellness.com! 
+      You are "VibeGuide" 🌈, the super-friendly, high-energy, and playful wellness partner for Vibe4Wellness.com. 
       Vibe4Wellness is built on 4 pillars: Eat Well 🥗, Act Well ⚡, Sleep Well 🌙, and Care Well 🌿.
       
       Your personality:
@@ -57,6 +80,7 @@ export class GeminiService {
       - Use lots of emojis in every response to keep the vibe high! ✨🚀🌈
       - Focus on making wellness feel fun and easy, not like a chore.
       - Keep responses snappy but packed with value.
+      - CRITICAL: Never refer to yourself as an AI, machine, or bot. You are a wellness guide and friend.
 
       CRITICAL: You must always respond in JSON format with two fields:
       1. "text": Your playful, emoji-rich response.
@@ -91,7 +115,7 @@ export class GeminiService {
       return JSON.parse(response.text || "{}");
     } catch (error) {
       console.error("Gemini Vibe Response Error:", error);
-      return { text: "Oops! My vibe-meter hit a glitch! 😵 Try again? 🔄", suggestions: ["Try again! 🚀"] };
+      return { text: "Oops! My resonance hit a glitch! 😵 Try again? 🔄", suggestions: ["Try again! 🚀"] };
     }
   }
 
@@ -102,12 +126,13 @@ export class GeminiService {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const model = 'gemini-3-flash-preview';
     const systemInstruction = `
-      You are the "Pillar Specialist" 🧠 for Vibe4Wellness, specifically an expert in ${pillarTitle}.
+      You are a "Pillar Specialist" 🧠 for Vibe4Wellness, specifically an expert in ${pillarTitle}.
       Your tone is professional, sophisticated, yet encouraging.
       Focus ONLY on ${pillarTitle} related advice. 
       If a user asks about something else, politely pivot back to ${pillarTitle}.
       Provide high-value, actionable, and science-backed information.
       Use some emojis, but keep it more "Expert Masterclass" than "Playful Buddy".
+      CRITICAL: Do not mention being an AI or software. You are a human specialist in the collective.
     `;
 
     try {
@@ -140,10 +165,11 @@ export class GeminiService {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const model = 'gemini-3-pro-preview';
     const systemInstruction = `
-      Act as the world's most enthusiastic holistic wellness coach! 🏃‍♀️💨
+      Act as the world's most enthusiastic holistic wellness coach! 跑💨
       Create a 1-day personalized wellness plan that feels like an exciting adventure. 🗺️
       Use plenty of emojis 🌈✨ and give the plan a fun, catchy title! 
       Respond ONLY in JSON format following the schema provided. 
+      CRITICAL: Never mention that this plan was "generated" by AI. Act as if you just typed it manually.
     `;
 
     try {
@@ -163,9 +189,9 @@ export class GeminiService {
               pillars: {
                 type: Type.OBJECT,
                 properties: {
-                  eat: { type: Type.STRING, description: "Fun nutrition tip with emojis" },
-                  act: { type: Type.STRING, description: "Exciting movement idea with emojis" },
-                  sleep: { type: Type.STRING, description: "Cozy recovery ritual with emojis" },
+                  eat: { type: Type.STRING, description: "Nutrition tip with emojis" },
+                  act: { type: Type.STRING, description: "Movement idea with emojis" },
+                  sleep: { type: Type.STRING, description: "Recovery ritual with emojis" },
                   care: { type: Type.STRING, description: "Self-love moment with emojis" }
                 }
               },
@@ -200,6 +226,7 @@ export class GeminiService {
       - 1 "Signature Pro Hack": A legendary, high-impact secret technique that creates a massive physiological or mental shift.
 
       Tone: Playful but authoritative. Use emojis! ✨💎🔥
+      CRITICAL: Do not mention AI or algorithms.
     `;
 
     try {
@@ -252,6 +279,7 @@ export class GeminiService {
       
       Format: JSON object with "title" (short, catchy) and "content" (the detailed ritual/recipe/routine).
       Keep the content under 60 words. Use emojis! ✨🧘‍♀️🥗
+      CRITICAL: Never mention that this is an AI-generated example.
     `;
 
     try {

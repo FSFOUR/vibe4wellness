@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const AIPlanetaryVisual: React.FC = () => {
+const PlanetaryVisual: React.FC = () => {
   // Breathtaking forest sunbeams to evoke a natural, grounded feeling.
   const imageUrl = "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200&auto=format&fit=crop";
 
@@ -25,7 +25,7 @@ const AIPlanetaryVisual: React.FC = () => {
       </div>
 
       <div className="absolute bottom-4 lg:bottom-10 left-4 lg:left-10 right-4 lg:right-10 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-        <p className="text-white font-bold text-xs lg:text-sm max-w-sm italic">
+        <p className="text-white font-bold text-xs lg:text-sm max-w-sm italic text-balance">
           "Sustainable health is the foundation of a thriving world."
         </p>
       </div>
@@ -33,4 +33,4 @@ const AIPlanetaryVisual: React.FC = () => {
   );
 };
 
-export default AIPlanetaryVisual;
+export default PlanetaryVisual;
